@@ -21,4 +21,15 @@ function printResult(num: number): undefined {
 
 printResult(add(5, 12));
 
+// Function as Types;
+// let combineValues: Function;
+// It will prams with inffered type and return it inferred function as types.
+let combineValues: (a: number, b: number) => number;
+
+combineValues = add;
+// combineValues = printResult;
+// combineValues = 5;
+
+console.log(combineValues(8, 8));
+
 // let someValue = undefined; // its fine
