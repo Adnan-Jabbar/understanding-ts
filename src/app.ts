@@ -28,24 +28,69 @@ age = 29;
 
 // const add = (a: number, b: number) => a + b;
 
-// Default function set the value in parameters must set in order to last param.
-const add = (a: number, b: number = 1) => a + b;
+// // Default function set the value in parameters must set in order to last param.
+// const add = (a: number, b: number = 1) => a + b;
 
-// const printOutput = (output: string | number) => {
-//     return console.log(output);
+// // const printOutput = (output: string | number) => {
+// //     return console.log(output);
+// // }
+
+// // const printOutput = (output: string | number) => console.log(output);
+
+// const printOutput: (a: number | string) => void = output => console.log(output);
+
+// const button = document.querySelector('button');
+
+// if(button) {
+//     button.addEventListener('click', event => console.log(event));
 // }
 
-// const printOutput = (output: string | number) => console.log(output);
+// // console.log(add(5, 2));
+// console.log(add(5));
 
-const printOutput: (a: number | string) => void = output => console.log(output);
+// Spread Operator
+const hobbies = ['Sports','Cooking'];
+const activeHobbies = ['Hiking'];
 
-const button = document.querySelector('button');
+activeHobbies.push(...hobbies);
 
-if(button) {
-    button.addEventListener('click', event => console.log(event));
+const person = {
+    name: 'Adnan',
+    age: 27
 }
+const coppiedPerson = { ...person };
 
-// console.log(add(5, 2
-console.log(add(5));
+console.log(coppiedPerson);
+
+// Rest Parameters
+const add = (...numbers: number[]) => {
+    // let result = 0;
+    // for() { }
+    return numbers.reduce((curResult, curValue) => {
+        return curResult + curValue;
+    }, 0);
+};
+
+const addNumbers = add(5, 10, 2, 3.7);
+console.log(addNumbers);
+
+// // Rest Parameters with Tuple will fix the length of an array
+// const add = (...numbers: [number, number, number]) => {
+//     // let result = 0;
+//     // for() { };
+//     return numbers.reduce((curResult, curValue) => {
+//         return curResult + curValue;
+//     }, 0);
+// };
+
+// const addNumbers = add(5, 10, 2);
+// console.log(addNumbers);
+
+
+
+
+
+
+
 
 
