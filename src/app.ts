@@ -1,9 +1,9 @@
-const userName = 'Max';
-// userName = 'Maximilian';
+// const userName = 'Max';
+// // userName = 'Maximilian';
 
-let age = 30;
+// let age = 30;
 
-age = 29;
+// age = 29;
 
 // function add(a: number, b: number) {
 //     let result;
@@ -55,7 +55,7 @@ const activeHobbies = ['Hiking'];
 activeHobbies.push(...hobbies);
 
 const person = {
-    name: 'Adnan',
+    firstName: 'Adnan',
     age: 27
 }
 const coppiedPerson = { ...person };
@@ -64,8 +64,6 @@ console.log(coppiedPerson);
 
 // Rest Parameters
 const add = (...numbers: number[]) => {
-    // let result = 0;
-    // for() { }
     return numbers.reduce((curResult, curValue) => {
         return curResult + curValue;
     }, 0);
@@ -74,17 +72,14 @@ const add = (...numbers: number[]) => {
 const addNumbers = add(5, 10, 2, 3.7);
 console.log(addNumbers);
 
-// // Rest Parameters with Tuple will fix the length of an array
-// const add = (...numbers: [number, number, number]) => {
-//     // let result = 0;
-//     // for() { };
-//     return numbers.reduce((curResult, curValue) => {
-//         return curResult + curValue;
-//     }, 0);
-// };
+const [hobby1, hobby2, ...remainingHobbies] = hobbies;
 
-// const addNumbers = add(5, 10, 2);
-// console.log(addNumbers);
+console.log(hobbies, hobby1, hobby2);
+
+const { firstName: userName, age } = person;
+
+console.log(userName, age, person);
+
 
 
 
