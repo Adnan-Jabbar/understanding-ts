@@ -1,10 +1,13 @@
-class Department {
+// Abstract class can not be class sel instantiate,
+// you must be used one abstract mentod in the abstract class and
+// that method must have to use it in all other inheritance class.
+abstract class Department {
     static fiscalYear = 2023;
     // private readonly id: string;
     // public name: string;
     protected employees: string[] = [];
 
-    constructor (private readonly id: string, public name: string) {
+    constructor (protected readonly id: string, public name: string) {
         // this.id = id;
         // this.name = n;
         // console.log(Department.fiscalYear);
@@ -14,9 +17,7 @@ class Department {
         return {name: name};
     }
 
-    describe(this: Department) {
-        console.log(`Department (${this.id}): ${this.name}`);
-    }
+    abstract describe(this: Department): void;
 
     addEmployee(employee: string) {
         // validation etc
@@ -35,6 +36,10 @@ class ITDepartment extends Department {
     constructor(id: string, admins: string[]) {
         super(id, 'IT');
         this.admins = admins;
+    }
+
+    describe() {
+        console.log('IT Department - ID: ' + this.id);
     }
 }
 
@@ -58,6 +63,10 @@ class AccountingDepartment extends Department {
     constructor(id: string, private reports: string[]) {
         super(id, 'Accounting');
         this.lastReport = reports[0];
+    }
+
+    describe() {
+        console.log('Account Department - ID: ' + this.id);
     }
 
     addEmployee(name: string) {
@@ -105,8 +114,9 @@ console.log(accounting.mostRecentReport);
 accounting.addEmployee('Adnan');
 accounting.addEmployee('Zeeshan');
 
-accounting.printReport();
-accounting.printExmployeeInfromation();
+// accounting.printReport();
+// accounting.printExmployeeInfromation();
+accounting.describe();
 
 // const accountingCopy = { name: 'DUMMY', describe: accounting.describe };
 
