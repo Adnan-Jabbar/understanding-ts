@@ -1,56 +1,25 @@
-// type AddFn = (a: number, b: number) => number;
-
-// interface as Function types alternative.
-interface AddFn {
-    (a: number, b: number): number;
+type Admin = {
+    name: string;
+    privilegies: string[];
 }
 
-let add: AddFn;
+type Employee = {
+    name: string;
+    startDate: Date;
+}
 
-add = (n1: number, n2: number) => {
-    return n1 + n2;
+// We can also use interface but best is types object for intesection types.
+// interface AlevatedEmployee extends Admin, Employee {};
+
+type AlevatedEmployee = Admin & Employee;
+
+const e1: AlevatedEmployee = {
+    name: 'Adnan',
+    privilegies: ['create-server'],
+    startDate: new Date()
 };
 
-interface Named {
-    // Optional Properties
-    readonly name?: string;
-    outputname?: string;
-}
+type Combinable = string | number;
+type Numeric = Number | boolean;
 
-// We can extends multiple interfaces 
-interface Greetable extends Named {
-    greet(phrase: string): void;
-}
-
-// We can implements multiple interfaces 
-class Person implements Greetable {
-    name?: string;
-    age = 30;
-
-    // // Optional Parameters
-    // constructor(n: string = '') {    OR
-    constructor(n?: string) {
-        if(n) {
-            this.name = n;
-        }
-    }
-
-    greet(phrase: string) {
-        if(this.name){
-            console.log(phrase + ' ' + this.name);
-        } else {
-            console.log('Hi!');
-        }
-    }
-}
-
-// let user1: Person;
-let user1: Greetable;  // Above both are the same.
-
-user1 = new Person();
-// user1.name = 'Imbisat';
-
-user1.greet('Hi there - I am');
-console.log(user1);
-
-
+type Universal = Combinable & Numeric;
