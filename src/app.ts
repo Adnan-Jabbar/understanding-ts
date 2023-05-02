@@ -1,4 +1,6 @@
 // type AddFn = (a: number, b: number) => number;
+
+// interface as Function types alternative.
 interface AddFn {
     (a: number, b: number): number;
 }
@@ -10,7 +12,9 @@ add = (n1: number, n2: number) => {
 };
 
 interface Named {
-    readonly name: string;
+    // Optional Properties
+    readonly name?: string;
+    outputname?: string;
 }
 
 // We can extends multiple interfaces 
@@ -20,22 +24,30 @@ interface Greetable extends Named {
 
 // We can implements multiple interfaces 
 class Person implements Greetable {
-    name: string;
+    name?: string;
     age = 30;
 
-    constructor(n: string) {
-        this.name = n;
+    // // Optional Parameters
+    // constructor(n: string = '') {    OR
+    constructor(n?: string) {
+        if(n) {
+            this.name = n;
+        }
     }
 
     greet(phrase: string) {
-        console.log(phrase + ' ' + this.name);
+        if(this.name){
+            console.log(phrase + ' ' + this.name);
+        } else {
+            console.log('Hi!');
+        }
     }
 }
 
 // let user1: Person;
 let user1: Greetable;  // Above both are the same.
 
-user1 = new Person('AdnanJabbar');
+user1 = new Person();
 // user1.name = 'Imbisat';
 
 user1.greet('Hi there - I am');
