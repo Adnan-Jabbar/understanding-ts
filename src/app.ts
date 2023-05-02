@@ -1,9 +1,13 @@
-interface Greetable {
+interface Named {
     readonly name: string;
+}
 
+// We can extends multiple interfaces 
+interface Greetable extends Named {
     greet(phrase: string): void;
 }
 
+// We can implements multiple interfaces 
 class Person implements Greetable {
     name: string;
     age = 30;
