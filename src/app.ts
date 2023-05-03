@@ -24,116 +24,131 @@ type Numeric = Number | boolean;
 
 type Universal = Combinable & Numeric;
 
+// Function Overloads
+function add(a: number, b: number): number;
+function add(a: string, b: string): string;
+function add(a: string, b: number): string;
+function add(a: number, b: string): string;
 function add(a: Combinable, b: Combinable) {
-    // Type Guards using Type Auth
     if(typeof a === 'string' || typeof b === 'string') {
         return a.toString() + b.toString();
     };
     return a + b;
 };
 
-// Two Cusotmer Object
-type UnknownEmployee = Admin | Employee;
+const result = add('Adnan', ' Jabbar');
+result.split(' ');
 
-function printEmployeeInformation(emp: UnknownEmployee) {
-    console.log('Name: ' + emp.name);
-    if('privileges' in emp){
-        console.log('Privileges: ' + emp.privileges);
-    }
-    if('startDate' in emp) {
-        console.log('Start Date: ' + emp.startDate);
-    }
-}
+// function add(a: Combinable, b: Combinable) {
+//     // Type Guards using Type Auth
+//     if(typeof a === 'string' || typeof b === 'string') {
+//         return a.toString() + b.toString();
+//     };
+//     return a + b;
+// };
 
-// printEmployeeInformation(e1);
-printEmployeeInformation({name: 'Imbisat', startDate: new Date()});
+// // Two Cusotmer Object
+// type UnknownEmployee = Admin | Employee;
 
-class Car {
-    drive() {
-        console.log('Driving...');
-    }
-}
+// function printEmployeeInformation(emp: UnknownEmployee) {
+//     console.log('Name: ' + emp.name);
+//     if('privileges' in emp){
+//         console.log('Privileges: ' + emp.privileges);
+//     }
+//     if('startDate' in emp) {
+//         console.log('Start Date: ' + emp.startDate);
+//     }
+// }
 
-class Truck {
-    drive() {
-        console.log('Driving a truck...');
-    }
+// // printEmployeeInformation(e1);
+// printEmployeeInformation({name: 'Imbisat', startDate: new Date()});
 
-    loadCargo(amount: number) {
-        console.log('Loading cargo ...' +amount);
-    }
-}
+// class Car {
+//     drive() {
+//         console.log('Driving...');
+//     }
+// }
 
-// Union Type
-type Vehicle = Car | Truck;
+// class Truck {
+//     drive() {
+//         console.log('Driving a truck...');
+//     }
 
-const v1 = new Car();
-const v2 = new Truck();
+//     loadCargo(amount: number) {
+//         console.log('Loading cargo ...' +amount);
+//     }
+// }
 
-function useVehicle(vehicle: Vehicle) {
-    vehicle.drive();
-    // if ('loadCargo' in vehicle) {
-    // Alternative elegant way to use instanceof.
-    if (vehicle instanceof Truck) {
-        vehicle.loadCargo(1000);
-    };
-};
+// // Union Type
+// type Vehicle = Car | Truck;
 
-useVehicle(v1);
-useVehicle(v2);
+// const v1 = new Car();
+// const v2 = new Truck();
 
-// Discriminate Unions Special Types of Type Guards 
+// function useVehicle(vehicle: Vehicle) {
+//     vehicle.drive();
+//     // if ('loadCargo' in vehicle) {
+//     // Alternative elegant way to use instanceof.
+//     if (vehicle instanceof Truck) {
+//         vehicle.loadCargo(1000);
+//     };
+// };
 
-interface Bird {
-    type: 'bird'  // Discriminate Unions
-    flyingSpeed: number;
-}
+// useVehicle(v1);
+// useVehicle(v2);
 
-interface Horse {
-    type: 'horse'  // Discriminate Unions
-    runningSpeed: number;
-}
+// // Discriminate Unions Special Types of Type Guards 
 
-// Discriminate Unions
-type Animal = Bird | Horse;
+// interface Bird {
+//     type: 'bird'  // Discriminate Unions
+//     flyingSpeed: number;
+// }
 
-function movieAnimal(animal: Animal) {
-    // if('flyingSpeed' in animal) {
-    //     console.log('Moving with speed: ' + animal);
-    // }
-    let speed;
-    switch(animal.type) {
-        case 'bird':
-            speed = animal.flyingSpeed;
-            break;
-        case 'horse':
-            speed = animal.runningSpeed;
-    }
-    console.log('Moving with speed: ' + speed);
-}
+// interface Horse {
+//     type: 'horse'  // Discriminate Unions
+//     runningSpeed: number;
+// }
 
-movieAnimal({type: 'bird', flyingSpeed: 10 });
+// // Discriminate Unions
+// type Animal = Bird | Horse;
 
-// const paragragh = document.querySelector('message-output');
-// Similar JSX but we use the alternative as keyword or if check mwthod.
-// const userInputElement = <HTMLInputElement>document.getElementById('user-input')!;
-// const userInputElement = document.getElementById('user-input')! as HTMLInputElement;
-const userInputElement = document.getElementById('user-input');
+// function movieAnimal(animal: Animal) {
+//     // if('flyingSpeed' in animal) {
+//     //     console.log('Moving with speed: ' + animal);
+//     // }
+//     let speed;
+//     switch(animal.type) {
+//         case 'bird':
+//             speed = animal.flyingSpeed;
+//             break;
+//         case 'horse':
+//             speed = animal.runningSpeed;
+//     }
+//     console.log('Moving with speed: ' + speed);
+// }
 
-if(userInputElement) {
-    (userInputElement as HTMLInputElement).value = "Hi there!";
-}
+// movieAnimal({type: 'bird', flyingSpeed: 10 });
 
-// Index Properties
-interface ErrorContainer { // { email: 'Not a valid email', username: 'Must start with a character!' }
-    // id: string; // we cann further obj properties but with same infered type with index properties.
-    [prop: string]: string;
-}
+// // const paragragh = document.querySelector('message-output');
+// // Similar JSX but we use the alternative as keyword or if check mwthod.
+// // const userInputElement = <HTMLInputElement>document.getElementById('user-input')!;
+// // const userInputElement = document.getElementById('user-input')! as HTMLInputElement;
+// const userInputElement = document.getElementById('user-input');
 
-const errorBag: ErrorContainer = {
-    email: 'Not a valid email!',
-    username: 'Must start with a capital character!'
-}
+// if(userInputElement) {
+//     (userInputElement as HTMLInputElement).value = "Hi there!";
+// }
+
+// // Index Properties
+// interface ErrorContainer { // { email: 'Not a valid email', username: 'Must start with a character!' }
+//     // id: string; // we cann further obj properties but with same infered type with index properties.
+//     [prop: string]: string;
+// }
+
+// const errorBag: ErrorContainer = {
+//     email: 'Not a valid email!',
+//     username: 'Must start with a capital character!'
+// }
 
 
 
