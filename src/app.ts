@@ -45,8 +45,23 @@ const fetchedUserData = {
     job: { title: 'CEO', description: 'My own company' }
 }
 
+// Optional chaining operator
 // console.log(fetchedUserData.job && fetchedUserData.job.title);
-console.log(fetchedUserData?.job?.title);   // typescript introduce optional chainnign operator in <= 3.7v 
+console.log(fetchedUserData?.job?.title);   // typescript introduce optional chaining operator in <= 3.7v
+
+// const userInput = '';
+const userInput = null;
+// const userInput = undefined;
+// const userInput = 0;
+
+// Nullish Coalescing Operator.
+// if set empty, null or undefined the it will be set DEFAULT value.
+// const storedData = userInput || 'DEFAULT';
+
+// if not null, zero and undefined it will use userInput other else use DEFAULT
+const storedData = userInput ?? 'DEFAULT';
+
+console.log(storedData);
 
 // function add(a: Combinable, b: Combinable) {
 //     // Type Guards using Type Auth
