@@ -39,6 +39,15 @@ function add(a: Combinable, b: Combinable) {
 const result = add('Adnan', ' Jabbar');
 result.split(' ');
 
+const fetchedUserData = {
+    id: 'u1',
+    name: 'Adnan',
+    job: { title: 'CEO', description: 'My own company' }
+}
+
+// console.log(fetchedUserData.job && fetchedUserData.job.title);
+console.log(fetchedUserData?.job?.title);   // typescript introduce optional chainnign operator in <= 3.7v 
+
 // function add(a: Combinable, b: Combinable) {
 //     // Type Guards using Type Auth
 //     if(typeof a === 'string' || typeof b === 'string') {
