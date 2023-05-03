@@ -124,6 +124,16 @@ if(userInputElement) {
     (userInputElement as HTMLInputElement).value = "Hi there!";
 }
 
+// Index Properties
+interface ErrorContainer { // { email: 'Not a valid email', username: 'Must start with a character!' }
+    // id: string; // we cann further obj properties but with same infered type with index properties.
+    [prop: string]: string;
+}
+
+const errorBag: ErrorContainer = {
+    email: 'Not a valid email!',
+    username: 'Must start with a capital character!'
+}
 
 
 
