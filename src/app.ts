@@ -114,6 +114,17 @@ function movieAnimal(animal: Animal) {
 
 movieAnimal({type: 'bird', flyingSpeed: 10 });
 
+// const paragragh = document.querySelector('message-output');
+// Similar JSX but we use the alternative as keyword or if check mwthod.
+// const userInputElement = <HTMLInputElement>document.getElementById('user-input')!;
+// const userInputElement = document.getElementById('user-input')! as HTMLInputElement;
+const userInputElement = document.getElementById('user-input');
+
+if(userInputElement) {
+    (userInputElement as HTMLInputElement).value = "Hi there!";
+}
+
+
 
 
 
