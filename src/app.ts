@@ -82,5 +82,38 @@ function useVehicle(vehicle: Vehicle) {
 useVehicle(v1);
 useVehicle(v2);
 
+// Discriminate Unions Special Types of Type Guards 
+
+interface Bird {
+    type: 'bird'  // Discriminate Unions
+    flyingSpeed: number;
+}
+
+interface Horse {
+    type: 'horse'  // Discriminate Unions
+    runningSpeed: number;
+}
+
+// Discriminate Unions
+type Animal = Bird | Horse;
+
+function movieAnimal(animal: Animal) {
+    // if('flyingSpeed' in animal) {
+    //     console.log('Moving with speed: ' + animal);
+    // }
+    let speed;
+    switch(animal.type) {
+        case 'bird':
+            speed = animal.flyingSpeed;
+            break;
+        case 'horse':
+            speed = animal.runningSpeed;
+    }
+    console.log('Moving with speed: ' + speed);
+}
+
+movieAnimal({type: 'bird', flyingSpeed: 10 });
+
+
 
 
