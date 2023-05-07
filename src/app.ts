@@ -64,6 +64,48 @@ function extractAndConvert<T extends Object, U extends keyof T>(obj: T, key: U) 
 
 extractAndConvert({ name: 'Adnan' }, 'name');
 
+/**** Generic Classes ****/
+// It should work with premitive value.
+class DataStorage<T extends string | number | boolean> {
+    private data: T[] = [];
+
+    addItem(item: T) {
+        this.data.push(item)
+    }
+
+    removeItem(item: T) {
+        if (this.data.indexOf(item) === -1) {
+            return;
+        }
+        this.data.splice(this.data.indexOf(item), 1)    // -1 it no item found it will accidently work.
+    }
+
+    getitems() {
+        return [...this.data];
+    }
+}
+
+const textStorage = new DataStorage<string>();
+textStorage.addItem('Adnan');
+textStorage.addItem('Imbisat');
+textStorage.removeItem('Adnan');
+console.log(textStorage.getitems());
+
+const numberStorage = new DataStorage<number>();
+
+// // Union Type We could use premitive value.
+// // const combineStorage = new DataStorage<number | string>();
+
+// const objStorage = new DataStorage<object>();
+// const nameObj = {name: 'Adnan'};
+// objStorage.addItem(nameObj);
+// objStorage.addItem({name: 'Imbisat'});
+// objStorage.removeItem({name: 'Adnan'});  // it will not be work due to new object and have new memory address in the object.
+
+// console.log(objStorage.getitems());
+
+
+
 
 
 
