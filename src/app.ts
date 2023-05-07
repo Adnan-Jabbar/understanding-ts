@@ -38,6 +38,39 @@ const mergedObj = merge({name: 'Adnan', hobbies: ['Sports']}, { age: 30 });
 
 console.log(mergedObj);
 
+/**** Another Generic Function ****/
+
+interface Lengthy {
+    length: number;
+}
+
+function countAndDescribe<T extends Lengthy>(element: T): [T, string] {
+    let descriptionText = 'Got no value.';
+    if(element.length === 1) {
+        descriptionText = "Got 1 element.";
+    } else if (element.length > 0) {
+        descriptionText = "Got " + element.length + " elements.";
+    }
+    return [element, descriptionText];
+}
+
+console.log(countAndDescribe(['Sports', 'Cooking']));
+
+/**** The keyof Constraint ****/
+function extractAndConvert<T extends Object, U extends keyof T>(obj: T, key: U) {
+    // return obj[key];  // Vanila JavaScript object Key Notation
+    return 'Value: ' + obj[key];
+}
+
+extractAndConvert({ name: 'Adnan' }, 'name');
+
+
+
+
+
+
+
+
 
 
 
