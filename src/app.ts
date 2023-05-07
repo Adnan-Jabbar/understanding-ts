@@ -34,6 +34,7 @@ function merge<T extends Object, U extends Object>(objA: T, objB: U) {
     return Object.assign(objA, objB);
 }
 
+// Which concrete type we passed in when we call function.
 const mergedObj = merge({name: 'Adnan', hobbies: ['Sports']}, { age: 30 });
 
 console.log(mergedObj);
@@ -85,6 +86,7 @@ class DataStorage<T extends string | number | boolean> {
     }
 }
 
+// Which concrete type we passed in when we instantiate.
 const textStorage = new DataStorage<string>();
 textStorage.addItem('Adnan');
 textStorage.addItem('Imbisat');
@@ -104,6 +106,27 @@ const numberStorage = new DataStorage<number>();
 
 // console.log(objStorage.getitems());
 
+/**** Builtin Generic Utility Partial Types ****/
+// Partial makes all properties as optional temprarly.
+interface CourseGoal {
+    title: string;
+    description: string;
+    completeUntil: Date;
+}
+
+function createCourseGoal(title: string, description: string, completeUntil: Date): CourseGoal {
+    // return { title: title, description: description, completeUntil: completeUntil};
+    let courseGoal: Partial<CourseGoal> = {};   // Generic Utility Partial Types.
+    courseGoal.title = title;
+    courseGoal.description = description;
+    courseGoal.completeUntil = completeUntil;
+    return courseGoal as CourseGoal;    // Type casting
+}
+
+// Generic Utility Readonly Types. 
+const names: Readonly<string[]> = ['Adnan', 'Imbisat'];
+// names.push('Anna');
+// names.pop();
 
 
 
