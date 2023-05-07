@@ -1,6 +1,7 @@
 // Working with Decorator Factories
 // function Logger(target: Function as Argument) {
 function Logger(logString: string) {
+    console.log('LOGGER FACTORY');
     return function (constructor: Function) {
         console.log(logString);
         console.log(constructor);
@@ -8,7 +9,9 @@ function Logger(logString: string) {
 };
 
 function WithTemplate(template: string, hookId: string) {
+    console.log('TEMPLATE FACTORY');
     return function(constructor: any) {
+        console.log('Rendering template');
         const hookEl = document.getElementById(hookId);
         const p = new constructor();
         if (hookEl) {
@@ -20,6 +23,7 @@ function WithTemplate(template: string, hookId: string) {
 }
 
 // @Logger('LOGGING - PERSON')
+@Logger('LOGGING')
 @WithTemplate('<h1>My Person Object</h1>', 'app')
 class Person {
     name = 'Adnan';
