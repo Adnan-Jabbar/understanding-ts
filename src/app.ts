@@ -133,21 +133,38 @@ interface validatorConfig {
 
 const registeredValidators: validatorConfig = {};
 
-// target: any (prototype of the object or if the constructor function it would have statics property) and don not get the descriptor for the properties.
-function RequiredW(target: any, propName: string) {
-    // registor a class name as key.
-    registeredValidators[target.constructor.name] = {
-        ...registeredValidators[target.constructor.name],
-        [propName]: ['required']
-    };
-};
+// // target: any (prototype of the object or if the constructor function it would have statics property) and don not get the descriptor for the properties.
+// function Required(target: any, propName: string) {
+//     // registor a class name as key.
+//     registeredValidators[target.constructor.name] = {
+//         ...registeredValidators[target.constructor.name],
+//         [propName]: ['required']
+//     };
+// };
 
-function PostiveNumber(target: any, propName: string) {
+// function PositiveNumber(target: any, propName: string) {
+//     registeredValidators[target.constructor.name] = {
+//         ...registeredValidators[target.constructor.name],
+//         [propName]: ['positive']
+//     };
+// };
+
+// In the current form, our validation logic is not entirely correct. It's not working as intended.
+// At the moment, only one validator value is stored in the array (e.g. 'required') - of course that's not what we need.
+// Multiple values should be stored instead - at least potentially.
+function Required(target: any, propName: string) {
     registeredValidators[target.constructor.name] = {
         ...registeredValidators[target.constructor.name],
-        [propName]: ['positive']
+        [propName]: [...(registeredValidators[target.constructor.name]?.[propName] ?? []), 'required']
     };
-};
+}
+ 
+function PositiveNumber(target: any, propName: string) {
+    registeredValidators[target.constructor.name] = {
+        ...registeredValidators[target.constructor.name],
+        [propName]: [...(registeredValidators[target.constructor.name]?.[propName] ?? []), 'positive']
+    };
+}
 
 function validate(obj: any) {
     const objValidatorConfig = registeredValidators[obj.constructor.name];
@@ -172,9 +189,9 @@ function validate(obj: any) {
 };
 
 class Course {
-    @RequiredW
+    @Required
     title: string;
-    @PostiveNumber
+    @PositiveNumber
     price: number;
 
     constructor(t: string, p: number) {
