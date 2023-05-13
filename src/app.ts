@@ -117,7 +117,7 @@ class Printer {
 }
 
 const p = new Printer();
-// p.showMessage();
+p.showMessage();
 
 const button = document.querySelector('button')!;
 // button.addEventListener('click', p.showMessage.bind(p));
