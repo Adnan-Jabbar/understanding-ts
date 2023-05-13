@@ -123,6 +123,85 @@ const button = document.querySelector('button')!;
 // button.addEventListener('click', p.showMessage.bind(p));
 button.addEventListener('click', p.showMessage);
 
+// ---
+
+interface validatorConfig {
+    [property: string]: {
+        [validatableProp: string]: string[] // ['required', 'positive']
+    }
+}
+
+const registeredValidators: validatorConfig = {};
+
+// target: any (prototype of the object or if the constructor function it would have statics property) and don not get the descriptor for the properties.
+function RequiredW(target: any, propName: string) {
+    // registor a class name as key.
+    registeredValidators[target.constructor.name] = {
+        ...registeredValidators[target.constructor.name],
+        [propName]: ['required']
+    };
+};
+
+function PostiveNumber(target: any, propName: string) {
+    registeredValidators[target.constructor.name] = {
+        ...registeredValidators[target.constructor.name],
+        [propName]: ['positive']
+    };
+};
+
+function validate(obj: any) {
+    const objValidatorConfig = registeredValidators[obj.constructor.name];
+    if (!objValidatorConfig) {
+        return true;
+    }
+    let isValid = true;
+    // giving access of the property name
+    for (const prop in objValidatorConfig) {
+        for (const validator of objValidatorConfig[prop]) {
+            switch (validator) {
+                case 'required':
+                    isValid = isValid && !!obj[prop];
+                    break;
+                case 'positive':
+                    isValid = isValid && obj[prop] > 0;
+                    break;
+            }
+        }
+    }
+    return isValid;
+};
+
+class Course {
+    @RequiredW
+    title: string;
+    @PostiveNumber
+    price: number;
+
+    constructor(t: string, p: number) {
+        this.title = t;
+        this.price = p;
+    }
+}
+
+const courseForm = document.querySelector('form')!;
+courseForm.addEventListener('submit', event => {
+    event.preventDefault();
+    const titleEl = document.getElementById('title') as HTMLInputElement;
+    const priceEl = document.getElementById('price') as HTMLInputElement;
+
+    const title = titleEl.value;
+    const price = +priceEl.value;
+
+    const createdCourse = new Course(title, price);
+
+    if(!validate(createdCourse)) {
+        alert('Invalid input, please try again!');
+        return;
+    }
+    console.log(createdCourse);
+});
+
+
 
 
 
